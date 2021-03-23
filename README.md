@@ -23,8 +23,15 @@ sudo grep -qxF "127.0.0.1 test-server.dev" /etc/hosts || sudo echo "127.0.0.1 te
 
 ## `docker-compose up`
 
+in Intel Mac:
 ```
-docker-compose up
+ARCH=amd64 docker-compose up
+```
+
+in Apple Silicon Mac:
+
+```
+ARCH=arm64v8 docker-compose up
 ```
 
 ## Visit the local dev server
