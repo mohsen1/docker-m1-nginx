@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   node:
-    image: arm64v8/node
+    image: ${ARCH:-amd64}/node
     environment:
       PORT: "80"
       NO_UPDATE_NOTIFIER: "true"
@@ -17,7 +17,7 @@ services:
       source: ./index.html
       target: /index.html
   nginx:
-    image: arm64v8/nginx
+    image: ${ARCH:-amd64}/nginx
     networks:
       local_dev:
         aliases:
