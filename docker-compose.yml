@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  node:
+    image: arm64v8/node
+    environment:
+      PORT: "80"
+      NO_UPDATE_NOTIFIER: "true"
+    command: 
+      - npx
+      - http-server
+    networks:
+      local_dev:
+        aliases:
+        - node.mynet
+    volumes:
+    - type: bind
+      source: ./index.html
+      target: /index.html
+  nginx:
+    image: arm64v8/nginx
+    networks:
+      local_dev:
+        aliases:
+        - nginx.mynet
+    ports:
+    - mode: host
+      target: 80
+      published: 80
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: ./certs
+      target: /certs
+    - type: bind
+      source: ./nginx.conf
+      target: /etc/nginx/nginx.conf
+networks:
+  local_dev: {}
